@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from company.models import Company
 from user.models import MyUser
 
 
@@ -7,3 +8,6 @@ from user.models import MyUser
 class UserAdmin(admin.ModelAdmin):
     fields = ('first_name', 'last_name', 'telephone_number', 'user_type')
     exclude = ('password',)
+
+
+admin.site.register(Company)

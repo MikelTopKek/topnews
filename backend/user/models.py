@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from company.models import Company
 
 
 class MyUser(AbstractUser):
@@ -14,8 +15,7 @@ class MyUser(AbstractUser):
                                      ('AD', 'ADMIN'),
                                      ('SP', 'SUPER_ADMIN')
                                  ))
-    # TODO::: add Company
-    # company_id = models.ForeignKey('Company', blank=True, null=True, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, blank=True, null=True, on_delete=models.CASCADE)
     # TODO::: add avatar
 
     class Meta:
