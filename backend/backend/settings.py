@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'user.apps.UserConfig',
     'company.apps.CompanyConfig',
+    'post.apps.PostConfig',
 ]
 
 MIDDLEWARE = [

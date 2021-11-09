@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from company.models import Company
+from post.models import Post
 from user.models import MyUser
 
 
@@ -11,3 +12,4 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Company)
+admin.site.register(Post)
