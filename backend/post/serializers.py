@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 
-from company.models import Company
+from post.models import Post
 
 
-class CompanySerializer(ModelSerializer):
+class PostSerializer(ModelSerializer):
     class Meta:
-        model = Company
+        model = Post
         fields = ('id', 'title', 'user_id', 'text', 'topic')

@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from user.serializers import UserSerializer
+from rest_framework.viewsets import ModelViewSet
 
 UserModel = get_user_model()
 
@@ -13,8 +15,10 @@ class UserDetailView(APIView):
         return Response(serializer.data)
 
 
-class UsersView(APIView):
+class UsersView(ModelViewSet):
+    queryset = UserModel.objects.all()
+    serializer_class = UserSerializer
 
-    def get(self, request):
-        users = UserModel.objects.all()
-        return Response(users)
+    @action(detail=False, methods=['get'])
+    def list(self, request, *args, **kwargs):
+        return super().list(request)
