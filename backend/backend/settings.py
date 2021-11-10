@@ -19,6 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg2',
+
+
     'user.apps.UserConfig',
     'company.apps.CompanyConfig',
     'post.apps.PostConfig',
@@ -68,6 +71,16 @@ DATABASES = {
 
 
 AUTH_USER_MODEL = 'user.MyUser'
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    }
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
