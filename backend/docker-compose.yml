@@ -14,6 +14,10 @@ services:
 
   web:
     build: .
+    environment:
+      - environment_type=local
+      - environment_file_path=env/.env.local
+      - PYTHONUNBUFFERED=1
     command: >
       bash -c "pip install -r requirements.txt
       && python manage.py makemigrations
