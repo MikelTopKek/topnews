@@ -19,6 +19,7 @@ Available commands to:
 
 Work with project:
 * Create file env/.env.local from env/.env.example
+* Change USE_S3 var if you want to upload your logo`s and avatars to AWS S3 bucket
 * Go to backend/ folder
 * Build and run project
 * All functions are available in swagger. 
