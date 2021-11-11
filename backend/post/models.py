@@ -15,4 +15,4 @@ class Post(models.Model):
         db_table = 'post'
 
     def __str__(self):
-        return str({self.title})
+        return str(self.title)
