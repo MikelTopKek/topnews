@@ -18,7 +18,7 @@ class MyUser(AbstractUser):
                                      ('SP', 'SUPER_ADMIN')
                                  ))
     company_id = models.ForeignKey(Company, blank=True, null=True, on_delete=models.CASCADE)
-    # TODO::: add avatar
+    avatar = models.ImageField(default="", null=True, blank=True, upload_to='src/images')
 
     class Meta:
         db_table = 'user'
