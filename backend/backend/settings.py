@@ -1,14 +1,20 @@
+import os
 from pathlib import Path
+
+from utils.env_utils import load_env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_env()
+ENV = os.getenv('environment_type')
 
-SECRET_KEY = 'django-insecure-%*nyzpki@f*hrj@jm8b-v*lrty3u0ccs62d#&zwfigh6c++&%('
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS')
+SERVER_HOST = os.getenv('SERVER_HOST')
+DJANGO_ADMIN_PAGE = os.getenv('DJANGO_ADMIN_PAGE')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
