@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -21,3 +22,9 @@ class UserViewSet(ModelViewSet):
         user = UserModel.objects.get(id=self.kwargs['user_id'])
         serializer = UserGetSerializer(user, context={'request': request})
         return Response(serializer.data)
+
+    @action(detail=False, methods=['delete'])
+    def destroy(self, request, *args, **kwargs):
+        user = UserModel.objects.get(id=self.kwargs['user_id'])
+        user.delete()
+        return Response(status.HTTP_200_OK)
