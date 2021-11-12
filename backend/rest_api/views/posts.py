@@ -30,8 +30,8 @@ class PostsViewSet(ModelViewSet):
 
     @action(detail=False, methods=['delete'])
     def destroy(self, request, *args, **kwargs):
-        user = Post.objects.get(id=self.kwargs['post_id'])
-        user.delete()
+        post = Post.objects.get(id=self.kwargs['post_id'])
+        post.delete()
         return Response(status.HTTP_200_OK)
 
     def perform_create(self, serializer):
