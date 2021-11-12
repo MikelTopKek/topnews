@@ -25,6 +25,13 @@ class SignUpUserSerializer(ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name', 'password')
 
 
+class UserSerializer(ModelSerializer):
+
+    class Meta:
+        model = UserModel
+        fields = ('id', 'first_name', 'last_name')
+
+
 class UserGetSerializer(ModelSerializer):
 
     company = CompanySerializer(read_only=True)
