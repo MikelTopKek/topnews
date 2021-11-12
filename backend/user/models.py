@@ -17,7 +17,7 @@ class MyUser(AbstractUser):
                                      ('AD', 'ADMIN'),
                                      ('SP', 'SUPER_ADMIN')
                                  ))
-    company_id = models.ForeignKey(Company, blank=True, null=True, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, blank=True, null=True, on_delete=models.CASCADE)
     avatar = models.ImageField(default="", null=True, blank=True, upload_to='src/images')
 
     class Meta:
