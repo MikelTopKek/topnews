@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  db_test:
+    image: postgres:13
+    hostname: 'db_test'
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  backend_test:
+#      image: ubuntu
+      environment:
+        - environment_type=test
+        - PYTHONUNBUFFERED=1
+        - PYTHONDONTWRITEBYTECODE=1
+      build:
+        context: .
+        dockerfile: Dockerfile-test
+      command: >
+        bash -c "pytest tests"
+      volumes:
+        - .:/app
+      depends_on:
+        - db_test
