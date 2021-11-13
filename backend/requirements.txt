@@ -11,3 +11,4 @@ django-storages==1.12.3
 
 pytest==6.2.3
 pytest-django==4.2.0
+pylint==2.7.4

@@ -9,7 +9,6 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   backend_test:
-#      image: ubuntu
       environment:
         - environment_type=test
         - PYTHONUNBUFFERED=1
@@ -18,7 +17,8 @@ services:
         context: .
         dockerfile: Dockerfile-test
       command: >
-        bash -c "pytest tests"
+        bash -c "pylint --rcfile=.pylintrc /app
+        && pytest tests"
       volumes:
         - .:/app
       depends_on:
