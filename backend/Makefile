@@ -11,3 +11,6 @@ build_backend:
 
 down_backend:
 	docker-compose -f docker-compose.yml down;
+
+run_test:
+	docker-compose -f docker-compose-test.yml up --build --abort-on-container-exit;
