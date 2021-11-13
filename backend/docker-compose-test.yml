@@ -1,16 +1,22 @@
 version: "3.9"
 services:
   db_test:
+    env_file:
+      - env/.env.test
     image: postgres:13
-    hostname: 'db_test'
+    hostname: 'db'
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
   backend_test:
+      env_file:
+        - env/.env.test
       environment:
-        - environment_type=test
+        - POSTGRES_DB=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
         - PYTHONUNBUFFERED=1
         - PYTHONDONTWRITEBYTECODE=1
       build:

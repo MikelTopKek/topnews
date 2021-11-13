@@ -18,7 +18,7 @@ Available commands to:
 > make down_backend
 
 Work with project:
-* Create file env/.env.local from env/.env.example
+* Create file env/.env.local and env/.env.test from env/.env.example
 * Change USE_S3 var if you want to upload your logo`s and avatars to AWS S3 bucket
 * Go to backend/ folder
 * Build and run project
