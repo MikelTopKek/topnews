@@ -124,6 +124,32 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'main_formatter': {
+            'format': '%(asctime)s %(name)s [%(filename)s:%(lineno)d] %(levelname)-8s %(message)s'
+        },
+    },
+    'handlers': {
+        'main_handler': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'main_formatter'
+        },
+    },
+    'loggers': {
+        'main_logger': {
+            'level': 'INFO',
+            'handlers': ['main_handler']
+        },
+        'error_logger': {
+            'level': 'ERROR',
+            'handlers': ['main_handler']
+        }
+    }
+}
+
 
 LANGUAGE_CODE = 'en-us'
 

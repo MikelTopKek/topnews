@@ -1,3 +1,6 @@
+import logging.config
+
+from django.conf import settings
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -5,6 +8,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from post.models import Post
 from post.serializers import PostPostSerializer, PostSerializer
+
+logging.config.dictConfig(settings.LOGGING)
+logger = logging.getLogger('main_logger')
 
 
 class PostsViewSet(ModelViewSet):
@@ -32,14 +38,19 @@ class PostsViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         post = Post.objects.get(id=self.kwargs['post_id'])
         post.delete()
+        logger.info(f'Post {post} deleted')
         return Response(status.HTTP_200_OK)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        title = serializer.data['title']
+        user = self.request.user
+        logger.info(f'Post {title} from user {user} created')
 
     def partial_update(self, request, *args, **kwargs):
         post = Post.objects.get(id=self.kwargs['post_id'])
         serializer = PostPostSerializer(post, data=request.data, context={'request': request}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        logger.info(f'Post {post} updated')
         return Response(serializer.data)
