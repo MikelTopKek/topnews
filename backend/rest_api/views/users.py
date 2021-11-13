@@ -1,3 +1,6 @@
+import logging.config
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import action
@@ -5,6 +8,9 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from user.serializers import UserGetSerializer
+
+logging.config.dictConfig(settings.LOGGING)
+logger = logging.getLogger('main_logger')
 
 UserModel = get_user_model()
 
@@ -27,4 +33,5 @@ class UserViewSet(ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         user = UserModel.objects.get(id=self.kwargs['user_id'])
         user.delete()
+        logger.info(f'User {user} deleted')
         return Response(status.HTTP_200_OK)
