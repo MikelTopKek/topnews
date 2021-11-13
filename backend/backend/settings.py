@@ -187,4 +187,3 @@ if USE_S3 is True:
 else:
     MEDIA_URL = '/mediafiles/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-
