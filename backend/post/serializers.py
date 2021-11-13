@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.fields import HiddenField
 
 from post.models import Post
 from user.serializers import UserSerializer

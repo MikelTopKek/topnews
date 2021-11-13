@@ -1,3 +1,4 @@
+# pylint: disable=W0621
 import os
 
 import pytest

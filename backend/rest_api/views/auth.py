@@ -1,3 +1,4 @@
+# pylint: disable= R0201, R0901
 import logging.config
 
 from django.conf import settings
