@@ -9,12 +9,13 @@ from rest_framework.viewsets import ModelViewSet
 
 from post.models import Post
 from post.serializers import PostPostSerializer, PostSerializer
+from rest_api.permissions import PermissionsPostsMixin
 
 logging.config.dictConfig(settings.LOGGING)
 logger = logging.getLogger('main_logger')
 
 
-class PostsViewSet(ModelViewSet):
+class PostsViewSet(PermissionsPostsMixin, ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     post_serializer_class = PostPostSerializer
@@ -38,6 +39,10 @@ class PostsViewSet(ModelViewSet):
     @action(detail=False, methods=['delete'])
     def destroy(self, request, *args, **kwargs):
         post = Post.objects.get(id=self.kwargs['post_id'])
+
+        if self.request.user.id != post.user.id:
+            return Response('You don`t have permission to delete this post')
+
         post.delete()
         logger.info(f'Post {post} deleted')
         return Response(status.HTTP_200_OK)
@@ -50,6 +55,10 @@ class PostsViewSet(ModelViewSet):
 
     def partial_update(self, request, *args, **kwargs):
         post = Post.objects.get(id=self.kwargs['post_id'])
+
+        if self.request.user.id != post.user.id:
+            return Response('You don`t have permission to change this post')
+
         serializer = PostPostSerializer(post, data=request.data, context={'request': request}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()

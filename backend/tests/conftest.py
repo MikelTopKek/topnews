@@ -15,6 +15,7 @@ def data_valid_sign_up_admin_user():
         'first_name': 'admin',
         'last_name': 'admin',
         'telephone_number': '+380954527680',
+        'is_staff': True
     }
 
 
