@@ -58,4 +58,3 @@ def authenticated_client(user):
     client = APIClient()
     client.force_authenticate(user=user)
     return client
-
