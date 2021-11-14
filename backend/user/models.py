@@ -19,6 +19,7 @@ class MyUser(AbstractUser):
                                  ))
     company = models.ForeignKey(Company, blank=True, null=True, on_delete=models.CASCADE)
     avatar = models.ImageField(default="", null=True, blank=True, upload_to='src/images')
+    is_staff = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'user'
