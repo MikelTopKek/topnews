@@ -9,7 +9,7 @@ USER_MODEL = get_user_model()
 
 
 @pytest.fixture()
-def data_valid_sign_up_user():
+def data_valid_sign_up_admin_user():
     return {
         'username': os.getenv('DJANGO_ADMIN_USER'),
         'first_name': 'admin',
@@ -30,8 +30,26 @@ def data_user():
 
 
 @pytest.fixture()
-def user(data_valid_sign_up_user):
-    created_user = USER_MODEL.objects.create(**data_valid_sign_up_user)
+def data_post():
+    return {
+        'title': 'test-title',
+        'text': 'test-text',
+        'topic': 'test-topic'
+    }
+
+
+@pytest.fixture()
+def data_company():
+    return {
+        'name': 'name-title',
+        'url': 'url-text',
+        'address': 'address-topic'
+    }
+
+
+@pytest.fixture()
+def user(data_valid_sign_up_admin_user):
+    created_user = USER_MODEL.objects.create(**data_valid_sign_up_admin_user)
     return created_user
 
 
@@ -40,3 +58,4 @@ def authenticated_client(user):
     client = APIClient()
     client.force_authenticate(user=user)
     return client
+
