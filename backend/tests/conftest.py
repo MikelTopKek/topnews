@@ -9,12 +9,14 @@ USER_MODEL = get_user_model()
 
 
 @pytest.fixture()
-def data_valid_sign_up_admin_user():
+def data_valid_sign_up_super_admin_user():
     return {
         'username': os.getenv('DJANGO_ADMIN_USER'),
         'first_name': 'admin',
         'last_name': 'admin',
         'telephone_number': '+380954527680',
+        'is_staff': True,
+        'is_superuser': True
     }
 
 
@@ -48,8 +50,8 @@ def data_company():
 
 
 @pytest.fixture()
-def user(data_valid_sign_up_admin_user):
-    created_user = USER_MODEL.objects.create(**data_valid_sign_up_admin_user)
+def user(data_valid_sign_up_super_admin_user):
+    created_user = USER_MODEL.objects.create(**data_valid_sign_up_super_admin_user)
     return created_user
 
 

@@ -26,6 +26,20 @@ class SignUpUserSerializer(ModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name', 'password')
 
 
+class SignUpAdminSerializer(SignUpUserSerializer):
+
+    def create(self, request):
+        user = UserModel.objects.create(
+            username=request['username'],
+            first_name=request['first_name'],
+            is_staff=True,
+        )
+
+        user.set_password(request['password'])
+        user.save()
+        return user
+
+
 class UserSerializer(ModelSerializer):
 
     class Meta:

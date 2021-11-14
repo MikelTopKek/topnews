@@ -9,18 +9,20 @@ from rest_framework.viewsets import ModelViewSet
 
 from company.models import Company
 from company.serializers import CompanySerializer
+from rest_api.permissions import PermissionsMixin
 
 logging.config.dictConfig(settings.LOGGING)
 logger = logging.getLogger('main_logger')
 
 
-class CompaniesViewSet(ModelViewSet):
+class CompaniesViewSet(PermissionsMixin, ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
     http_method_names = ['get', 'post', 'delete', 'patch']
 
     @action(detail=False, methods=['get'])
     def list(self, request, *args, **kwargs):
+
         return super().list(request)
 
     def retrieve(self, request, *args, **kwargs):

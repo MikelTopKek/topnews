@@ -9,6 +9,7 @@ from user.models import MyUser
 class UserAdmin(admin.ModelAdmin):
     fields = ('username', 'first_name', 'last_name', 'telephone_number', 'user_type', 'avatar', 'company')
     exclude = ('password',)
+    readonly_fields = ('user_type',)
 
 
 admin.site.register(Company)
