@@ -22,7 +22,7 @@ def test_view_sign_up(authenticated_client, data_user):
 
 
 @pytest.mark.django_db(transaction=True, reset_sequences=True)
-def test_user_delete(authenticated_client, data_user, data_valid_sign_up_admin_user):
+def test_user_delete(authenticated_client, data_user):
 
     client = authenticated_client
     client.post(URL_SIGN_UP, data_user, format='json')
