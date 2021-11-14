@@ -1,3 +1,4 @@
+# pylint: disable=W0221
 from django.contrib.auth import get_user_model
 from rest_framework.fields import CharField
 from rest_framework.serializers import ModelSerializer
