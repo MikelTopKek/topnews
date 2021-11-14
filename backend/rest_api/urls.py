@@ -6,7 +6,7 @@ from rest_api.views import (CompaniesViewSet, PostsViewSet, SignUpView,
 
 urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
-    path('signup/admin/', SignUpAdminView.as_view(), name='signup'),
+    path('signup/admin/', SignUpAdminView.as_view(), name='signup_admin'),
     path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('users/', UserViewSet.as_view({'get': 'list'}), name='users_details'),
