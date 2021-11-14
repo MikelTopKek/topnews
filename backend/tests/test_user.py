@@ -13,7 +13,6 @@ def test_view_sign_up(authenticated_client, data_user):
 
     client = authenticated_client
     request = client.post(URL_SIGN_UP, data_user, format='json')
-    print(request.json())
 
     assert request.status_code == status.HTTP_201_CREATED
     recipients_after_post = UserModel.objects.get(id='2')
