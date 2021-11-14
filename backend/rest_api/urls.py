@@ -13,7 +13,7 @@ urlpatterns = [
     path('posts/', PostsViewSet.as_view({'post': 'create', 'get': 'list'}), name='posts_details'),
     path('posts/<post_id>/',
          PostsViewSet.as_view({'get': 'retrieve', 'patch': 'partial_update', 'delete': 'destroy'}),
-         name='posts_details'),
+         name='post_details'),
     path('companies/', CompaniesViewSet.as_view({'post': 'create', 'get': 'list'}), name='companies_details'),
     path('companies/<company_id>/',
          CompaniesViewSet.as_view({'get': 'retrieve', 'delete': 'destroy', 'patch': 'partial_update'}),
