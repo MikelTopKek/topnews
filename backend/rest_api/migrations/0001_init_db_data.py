@@ -1,7 +1,7 @@
-from django.contrib.auth import get_user_model
-from django.db import migrations
 import random
 
+from django.contrib.auth import get_user_model
+from django.db import migrations
 
 from company.models import Company
 from post.models import Post
@@ -33,7 +33,6 @@ def init_db_data(apps, schema_editor):
         }
         Company.objects.create(**company_data)
 
-    """Creating users and their posts (number of posts chosen randomly)"""
     for users in range(int(data['number_of_users'])):
         user_id += 1
         user_data = {
@@ -43,7 +42,7 @@ def init_db_data(apps, schema_editor):
             'email': f'some-email{user_id}@gmail.com',
             'telephone_number': '+380954527680',
             'password': 'password',
-            'is_staff': True,
+            'is_staff': False,
             'is_superuser': False,
             'company': Company.objects.get(id=random.randint(1, data['number_of_companies']))
         }
