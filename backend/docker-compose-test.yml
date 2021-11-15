@@ -11,12 +11,8 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   backend_test:
-      env_file:
-        - env/.env.test
       environment:
-        - POSTGRES_DB=postgres
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
+        - environment_type=test
         - PYTHONUNBUFFERED=1
         - PYTHONDONTWRITEBYTECODE=1
       build:
