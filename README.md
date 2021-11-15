@@ -5,17 +5,20 @@ Core technologies used:
 * Postgres
 
 Available commands to:
-> build:
+> build project:
 > make build_backend
 
-> run:
+> run project:
 > make start_backend
 
-> stop:
+> stop project:
 > make stop_backend
 
-> down:
+> down project:
 > make down_backend
+
+> to run tests
+> make run_test
 
 Work with project:
 * Create file env/.env.local and env/.env.test from env/.env.example
@@ -37,10 +40,6 @@ Create superuser:
 > docker exec -it backend_web_1 /bin/bash
 * run python manage.py createsuperuser
 * write your login and password
-
-Run tests:
-* To run tests run command
-> make run_test
 
 Django admin: http://localhost:8000/admin/
 
