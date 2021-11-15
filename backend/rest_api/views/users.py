@@ -8,6 +8,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from rest_api.permissions import PermissionsUsersMixin
 from user.serializers import UserGetSerializer
 
 logging.config.dictConfig(settings.LOGGING)
@@ -16,7 +17,7 @@ logger = logging.getLogger('main_logger')
 UserModel = get_user_model()
 
 
-class UserViewSet(ModelViewSet):
+class UserViewSet(PermissionsUsersMixin, ModelViewSet):
     queryset = UserModel.objects.all()
     serializer_class = UserGetSerializer
     http_method_names = ['get', 'delete']

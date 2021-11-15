@@ -37,6 +37,17 @@ class PermissionsPostsMixin(PermissionsMixin):
     }
 
 
+class PermissionsUsersMixin(PermissionsMixin):
+
+    permission_classes_by_action = {
+        "default": [AllowAny | IsAdminUser],
+        "partial_update": [IsAuthenticated],
+        "destroy": [IsAdminUser],
+        "perform_create": [IsAdminUser]
+
+    }
+
+
 class IsSuperUser(IsAdminUser):
     def has_permission(self, request, view):
         return bool(request.user and request.user.is_superuser)
