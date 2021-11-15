@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:13
+    env_file:
+      - env/.env.local
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
+
+  web:
+    build: .
+    environment:
+      - environment_type=local
+      - PYTHONUNBUFFERED=1
+    command: >
+      bash -c "pip install -r requirements.txt
+      && python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
