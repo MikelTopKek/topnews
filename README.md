@@ -27,7 +27,7 @@ Work with project:
 * Build and run project
 * All functions are available in swagger. 
 * Sign up your user
-* Take Bearer access token from /token
+* Take Bearer access token from /login
 * Press Authorize button and insert token like in the example: "Bearer <your-token>" 
 * Enjoy!
 
