@@ -1,3 +1,4 @@
+# pylint: disable=W0223
 from rest_framework import serializers
 
 from post.models import Post

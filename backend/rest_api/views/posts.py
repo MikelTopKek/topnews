@@ -1,4 +1,4 @@
-# pylint: disable=R0901
+# pylint: disable=R0901, W0613, R0201
 import logging.config
 
 from django.conf import settings
@@ -69,7 +69,6 @@ class PostsViewSet(PermissionsPostsMixin, ModelViewSet):
         serializer.save()
         logger.info(f'Post {post} updated')
         return Response(serializer.data)
-
 
     @swagger_auto_schema(
         operation_description='Bulk update posts topic',
