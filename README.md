@@ -29,10 +29,18 @@ Work with project:
 * Enjoy!
 
 Create superuser:
-* Go to web container 
+* Superuser already created in data migration (/rest_api/migrations/0001_init_db_data.py)
+> Login: admin 
+> 
+> Password: password
+* If you want to create another - go to web container 
 > docker exec -it backend_web_1 /bin/bash
 * run python manage.py createsuperuser
-* write your logpass
+* write your login and password
+
+Run tests:
+* To run tests run command
+> make run_test
 
 Django admin: http://localhost:8000/admin/
 
@@ -42,3 +50,4 @@ Django swagger: http://localhost:8000/swagger/
 > docker system prune --all
 #### If you have conflicts with postgres on your ubuntu you can stop it
 > sudo systemctl stop postgresql
+#### If you have problems with db while testing add recursive read/write permissions to backend/data/ directory
