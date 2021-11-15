@@ -9,6 +9,19 @@ from post.models import Post
 UserModel = get_user_model()
 
 
+def create_super_user():
+    user_data = {
+        'username': f'admin',
+        'first_name': f'admin',
+        'last_name': f'admin',
+        'email': f'admin@gmail.com',
+        'telephone_number': '+380950000000',
+        'password': 'password',
+        'is_superuser': True
+    }
+    UserModel.objects.create(**user_data)
+
+
 def delete_everything():
     UserModel.objects.all().delete()
     Post.objects.all().delete()
@@ -21,7 +34,7 @@ def init_db_data(apps, schema_editor):
 
     data = {'number_of_users': 200, 'posts_per_user': 30, 'number_of_companies': 10}
     post_id = 0
-    user_id = 0
+    user_id = 1
     company_id = 0
 
     for company in range(data['number_of_companies']):
