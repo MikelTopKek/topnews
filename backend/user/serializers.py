@@ -57,3 +57,10 @@ class UserGetSerializer(ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('id', 'username', 'created_at', 'updated_at', 'telephone_number', 'user_type', 'avatar', 'company')
+
+
+class UserUpdateSerializer(ModelSerializer):
+
+    class Meta:
+        model = UserModel
+        fields = ('id', 'username', 'first_name', 'last_name', 'telephone_number')
