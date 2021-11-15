@@ -8,6 +8,8 @@ def load_env():
     project_root = Path(__file__).parent.parent
     if os.getenv('environment_type') == 'local':
         env_file_path = "env/.env.local"
+    elif os.getenv('environment_type') == 'test':
+        env_file_path = "env/.env.test"
     else:
         env_file_path = "env/.env.example"
 
