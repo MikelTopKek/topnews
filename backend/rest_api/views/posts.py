@@ -2,13 +2,18 @@
 import logging.config
 
 from django.conf import settings
+from django.db import transaction
+from drf_yasg2 import openapi
+from drf_yasg2.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from post.models import Post
-from post.serializers import PostPostSerializer, PostSerializer
+from post.serializers import (PostManySerializer, PostPostSerializer,
+                              PostSerializer)
+from rest_api.constants import ERROR_RESPONSE_EXAMPLE, SUCCESS_RESPONSE_EXAMPLE
 from rest_api.permissions import PermissionsPostsMixin
 
 logging.config.dictConfig(settings.LOGGING)
@@ -19,7 +24,7 @@ class PostsViewSet(PermissionsPostsMixin, ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     post_serializer_class = PostPostSerializer
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ['get', 'post', 'patch', 'delete', 'put']
 
     def get_serializer_class(self):
         if self.action in ['create', 'partial_update']:
@@ -64,3 +69,34 @@ class PostsViewSet(PermissionsPostsMixin, ModelViewSet):
         serializer.save()
         logger.info(f'Post {post} updated')
         return Response(serializer.data)
+
+
+    @swagger_auto_schema(
+        operation_description='Bulk update posts topic',
+        request_body=openapi.Schema(
+            description="Data to update posts",
+            type=openapi.TYPE_OBJECT,
+            properties={
+                "old_topic": openapi.Schema(type=openapi.TYPE_STRING),
+                "new_topic": openapi.Schema(type=openapi.TYPE_STRING),
+            }
+        ),
+        responses={
+            status.HTTP_200_OK: SUCCESS_RESPONSE_EXAMPLE,
+            status.HTTP_400_BAD_REQUEST: ERROR_RESPONSE_EXAMPLE,
+        }
+    )
+    @transaction.atomic
+    @action(detail=False, methods=['put'])
+    def bulk_update(self, request, *args, **kwargs):
+
+        serializer = PostManySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.data
+
+        posts = Post.objects.filter(topic=data['old_topic'])
+
+        for post in posts:
+            post.topic = data['new_topic']
+        Post.objects.bulk_update(posts, ['topic'])
+        return Response({"message": 'ok'})

@@ -20,3 +20,9 @@ class PostPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'title', 'text', 'topic', 'user')
+
+
+class PostManySerializer(serializers.Serializer):
+
+    old_topic = serializers.CharField(max_length=64)
+    new_topic = serializers.CharField(max_length=64)
