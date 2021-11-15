@@ -15,6 +15,7 @@ from post.serializers import (PostManySerializer, PostPostSerializer,
                               PostSerializer)
 from rest_api.constants import ERROR_RESPONSE_EXAMPLE, SUCCESS_RESPONSE_EXAMPLE
 from rest_api.permissions import PermissionsPostsMixin
+from user.choices import CLIENT
 
 logging.config.dictConfig(settings.LOGGING)
 logger = logging.getLogger('main_logger')
@@ -61,7 +62,7 @@ class PostsViewSet(PermissionsPostsMixin, ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
         post = Post.objects.get(id=self.kwargs['post_id'])
 
-        if self.request.user.id != post.user.id:
+        if self.request.user.id != post.user.id and self.request.user.user_type == CLIENT:
             return Response('You don`t have permission to change this post')
 
         serializer = PostPostSerializer(post, data=request.data, context={'request': request}, partial=True)
